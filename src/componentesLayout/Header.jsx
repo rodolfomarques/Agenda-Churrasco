@@ -33,32 +33,23 @@ const Header = ({open}) => {
     };
     
     return (
-        <AppBar position="fixed" open={open}>
-            <Container maxWidth="xl">
-                <Toolbar disableGutters sx={{display: 'flex', justifyContent: 'space-between'}}>
-                    <img src={logo} alt='Mercado Eletrônico' />
-                    <Box component='section' sx={{ flexGrow: 0 }}>
-                        {!autenticado && <Button variant="contained" sx={{mr:1}} onClick={handleAbrirLogin}>Login</Button>}
-                        {
-                            autenticado && (
-                                <Box component='article' sx={{display: 'flex'}}>
-                                    <Avatar sx={{mr: 1}} >{`${authState.usuario.nome.split(' ')[0][0]}${authState.usuario.nome.split(' ')[1][0]}`}</Avatar>
-                                    <Box>
-                                        <Typography variant='subtitle2' >Bem vindo,</Typography>
-                                        <Typography variant='subtitle1' sx={{color: '#000', lineHeight:0.6,}}>{authState.usuario.nome}</Typography>
-                                    </Box>
-                                    <IconButton onClick={handleAbrirPerfil}>
-                                        <ArrowDropDownIcon />
-                                    </IconButton>
-                                </Box>
-                            )
-                        }
-                        <Perfil ancoraMenuPerfil={ancoraMenuPerfil} setAncoraMenuPerfil={setAncoraMenuPerfil} />
-                        <Login ancoraMenuLogin={ancoraMenuLogin} setAncoraMenuLogin={setAncoraMenuLogin} />
+        <Box component='section'>
+            {!autenticado && <Button variant="contained" sx={{mr:1}} onClick={handleAbrirLogin}>Login</Button>}
+            {
+                autenticado && (
+                    <Box component='article' sx={{display: 'flex'}}>
+                        <Avatar sx={{mr: 1}} >{`${authState.usuario.nome.split(' ')[0][0]}${authState.usuario.nome.split(' ')[1][0]}`}</Avatar>
+                        <Box>
+                            <Typography variant='subtitle2' >Bem vindo,</Typography>
+                            <Typography variant='subtitle1' sx={{color: '#000', lineHeight:0.6,}}>{authState.usuario.nome}</Typography>
+                        </Box>
+                        <IconButton onClick={handleAbrirPerfil}>
+                            <ArrowDropDownIcon />
+                        </IconButton>
                     </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
+                )
+            }
+        </Box>
     )
 }
 
