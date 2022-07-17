@@ -6,7 +6,7 @@ const axios = new Axios();
 
 const inicialState = {
     churrascos: [],
-    banner: []
+    churrascoSelecionado: {}
 }
 
 

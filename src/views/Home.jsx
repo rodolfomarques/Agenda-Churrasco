@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { DataContext }  from '../model/contextos';
 import CardProduto from "./components/CardProduto";
 import AdicionarChurrasco from "./components/AdicionarChurrasco";
@@ -6,6 +6,10 @@ import AdicionarChurrasco from "./components/AdicionarChurrasco";
 const Home = () => {
 
     const { dataState } = useContext(DataContext);
+
+    useEffect(() => {
+        console.log(dataState);
+    }, [])
 
     let homeStyle = {
 

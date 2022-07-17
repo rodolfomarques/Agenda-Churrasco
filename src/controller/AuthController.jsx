@@ -5,7 +5,6 @@ import { authReducer } from "../model/reduces";
 const inicialState = { 
     usuario: {
         nome: '',
-        ultimoAcesso: ''
     },
     autenticado: false
 }

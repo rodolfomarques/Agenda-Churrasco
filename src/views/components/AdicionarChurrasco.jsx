@@ -1,6 +1,11 @@
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import bbqIcon from '../../images/icon_bbq.png'
 
-const AdicionarChurrasco = ({churrasco}) => {
+const AdicionarChurrasco = ({}) => {
+
+    const navigate = useNavigate();
+    const [ hover, setHover ] = useState(false);
 
     let styleCard = {
 
@@ -8,7 +13,9 @@ const AdicionarChurrasco = ({churrasco}) => {
         backgroundColor: "#F1F1F1",
         padding: '20px 40px',
         borderRadius: '2px',
-        boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.06)',
+        boxShadow: hover? '1px 1px 16px rgba(0, 0, 0, 0.3)':'0px 0px 16px rgba(0, 0, 0, 0.06)',
+        cursor: hover? 'pointer': `default`,
+        transition: `box-shadow .4s`,
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center'
@@ -26,9 +33,12 @@ const AdicionarChurrasco = ({churrasco}) => {
         alignItems: 'center'
 
     }
+
+    const onMouseHover = () => { setHover(true) };
+    const onMouseLeaves = () => { setHover(false) };
     
     return (
-        <article style={styleCard}>
+        <article style={styleCard} onMouseEnter={onMouseHover} onMouseLeave={onMouseLeaves} onClick={() => {navigate(`/novochurrasco`)}}>
             <div style={iconContainerStyle}>
                 <img src={bbqIcon} alt='adicionar churrasco'/>
             </div>

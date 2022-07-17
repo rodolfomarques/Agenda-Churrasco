@@ -1,8 +1,14 @@
+import { useContext } from 'react';
+import { AuthContext } from '../model/contextos';
+import Axios from '../API/endpoints';
 import TextField from "./components/TextField";
 import CustomButton from "./components/CustomButton";
 
+const axios = new Axios();
 
 const Login = () => {
+
+    const { authDispatch } = useContext(AuthContext);
 
     let sectionStyle = {
 
@@ -23,11 +29,26 @@ const Login = () => {
 
     }
 
+    const onSubmitHandler = (e) => {
+        
+        e.preventDefault();
+        
+        let form = document.forms.loginForm;
+
+        let login = form.login.value;
+        let senha = form.senha.value;
+
+        axios.post('/login', {login, senha})
+        .then(resp => { authDispatch({type: 'inserirDadosUsuario', payload: resp.data}) })
+
+
+    }
+
     return (
         <section style={sectionStyle}>
-            <form name='loginForm' id='loginForm' style={formStyle}>
-                <TextField label='Login' type='text' inputProps={{placeholder: 'e-mail'}} />
-                <TextField label='Senha' type='password' inputProps={{placeholder: 'senha'}} />
+            <form name='loginForm' id='loginForm' style={formStyle} onSubmit={(e) => {onSubmitHandler(e)}}>
+                <TextField label='Login' type='text' inputProps={{placeholder: 'e-mail', id:'login'}} />
+                <TextField label='Senha' type='password' inputProps={{placeholder: 'senha', id:'senha'}} />
                 <CustomButton label='Entrar' />
             </form>
         </section> 

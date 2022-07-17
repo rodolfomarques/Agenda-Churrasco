@@ -1,10 +1,30 @@
-import { useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import { DataContext } from '../../model/contextos';
 
-const ItemParticipante = () => {
+const ItemParticipante = ({participante, setTotalArrecadado, index}) => {
 
     const [ hover, setHover ] = useState(false);
     const [ checked, setChecked ] = useState(false)
+    const { dataDispatch } = useContext(DataContext);
 
+
+    // useEffect(() => {
+
+    //     if(participante.pagamentoRealizado) { 
+    //         setChecked(true);
+    //         // setTotalArrecadado(prevState => prevState + participante.contribuicao);
+    //     } 
+    //     else { setChecked(false) }
+
+    // }, [participante])
+
+    useEffect(() => {
+
+        dataDispatch({type: 'avaliarContribuicao', payload: {id: participante.id, status: checked}})
+
+    },[checked])
+
+   
     let itemStyle = {
 
         width: '100%',
@@ -40,7 +60,19 @@ const ItemParticipante = () => {
 
     const onMouseHover = () => { setHover(true) }
     const onMouseLeaves = () => { setHover(false) }
-    const onClick = () => { setChecked(prevState =>  !prevState) }
+    const onClick = () => {
+        setChecked(prevState => !prevState);
+        dataDispatch({})
+    }
+
+    const handleCollaboration = (e) => {
+        console.log(e.target.checked);
+        if(e.target.checked) {
+            setTotalArrecadado(prevState => prevState + participante.contribuicao)
+        } else {
+            setTotalArrecadado(prevState => prevState - participante.contribuicao)
+        }
+    }
 
     return (
         <>
@@ -48,7 +80,7 @@ const ItemParticipante = () => {
                 style={itemStyle}
                 onMouseEnter={onMouseHover}
                 onMouseLeave={onMouseLeaves}
-                onClick={onClick}
+                // onClick={onClick}
             >
                 <label 
                     style={
@@ -59,13 +91,15 @@ const ItemParticipante = () => {
                             '&:hover input ~ span': {backgroundColor:'#ccc',}
                         }
                     }
-                    onClick={onClick}
+                    // onClick={onClick}
                 >
-                    <input style={checkStyle} type='checkbox' checked={checked} onChange={() => {}} />
-                    <span style={customCheckbox} onClick={onClick}></span>
-                    <p style={paragraphStyle} onClick={onClick}>Pedro</p>
+                    <input id={`participante-${index}`} style={checkStyle} type='checkbox' checked={participante.pagamentoRealizado} onChange={(e) => {handleCollaboration(e)}} />
+                    <span style={customCheckbox}  onClick={onClick}></span>
+                    <p style={paragraphStyle} 
+                        // onClick={onClick}
+                    >{participante.nome}</p>
                 </label>
-                <p style={{...paragraphStyle, textDecoration: checked? 'line-through': 'unset',}}>R$ 20,00</p>
+                <p style={{...paragraphStyle, textDecoration: checked? 'line-through': 'unset',}}>{participante.contribuicao.toLocaleString(`pt-br`, {style:'currency', currency:'BRL'})}</p>
             </li>
             <hr style={{margin: 0, border: '1px solid #E5C23155', }} />
         </>
