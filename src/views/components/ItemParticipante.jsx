@@ -1,7 +1,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { DataContext } from '../../model/contextos';
 
-const ItemParticipante = ({participante, setTotalArrecadado, index}) => {
+const ItemParticipante = ({participante, setTotalArrecadado, index, removerItem, habilitarDeletar}) => {
 
     const [ hover, setHover ] = useState(false);
     const [ checked, setChecked ] = useState(false)
@@ -99,7 +99,10 @@ const ItemParticipante = ({participante, setTotalArrecadado, index}) => {
                         // onClick={onClick}
                     >{participante.nome}</p>
                 </label>
-                <p style={{...paragraphStyle, textDecoration: checked? 'line-through': 'unset',}}>{participante.contribuicao.toLocaleString(`pt-br`, {style:'currency', currency:'BRL'})}</p>
+                <div style={{display: 'flex', gap: 10}}>
+                    <p style={{...paragraphStyle, textDecoration: checked? 'line-through': 'unset',}}>{participante.contribuicao.toLocaleString(`pt-br`, {style:'currency', currency:'BRL'})}</p>
+                    {habilitarDeletar && <button style={{color: '#fff', border: 'unset', borderRadius: '5px', backgroundColor: '#a02e2e'}} onClick={() => removerItem(participante.id)}>remover</button>}
+                </div>
             </li>
             <hr style={{margin: 0, border: '1px solid #E5C23155', }} />
         </>

@@ -2,6 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { DataContext }  from '../model/contextos';
 import ItemParticipante from "./components/ItemParticipante";
+import CustomButton from "./components/CustomButton";
 import { format } from "date-fns";
 
 //ícones
@@ -14,6 +15,7 @@ const DetalhesChurrasco = () => {
     const { dataState, dataDispatch } = useContext(DataContext);
     const [ churrasco, setChurrasco ] = useState({participantes: [], nome: '', valorTotal: 0,})
     const [ totalArrecadado, setTotalArrecadado ] = useState(0)
+    const [ ativarRemover, setAtivarRemover ] = useState(false)
     const { id } = useParams();
 
 
@@ -51,6 +53,14 @@ const DetalhesChurrasco = () => {
         fontWeight: 600
     }
 
+    const handleDeleteItem = (id_participante) => {
+
+        dataDispatch({type: 'removerParticipante', payload: {id_churrasco: id, id_participante}})
+   
+    }
+
+    const habilitarBotaoDelete = () => { setAtivarRemover(prevState => !prevState) }
+
     return (
         <article style={style}>
             <section style={styleHeader}>
@@ -75,11 +85,22 @@ const DetalhesChurrasco = () => {
                 {
                     churrasco.participantes.map((participante, i) => {
                         return (
-                            <ItemParticipante participante={participante} setTotalArrecadado={setTotalArrecadado} index={i} />
+                            <ItemParticipante 
+                                participante={participante} 
+                                setTotalArrecadado={setTotalArrecadado} 
+                                index={i} 
+                                key={i} 
+                                removerItem={handleDeleteItem} 
+                                habilitarDeletar={ativarRemover} 
+                            />
                         )
                     })
                 }
             </ol>
+            <section style={{padding: '10px 30px', display: 'flex', gap: '10px'}}>
+                <CustomButton label='Adicionar participante' />
+                <CustomButton label='Remover participante' buttonProps={{onClick: habilitarBotaoDelete}} />
+            </section>
         </article>
     )
 

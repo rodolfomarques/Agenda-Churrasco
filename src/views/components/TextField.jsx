@@ -4,7 +4,6 @@ const TextField = (props) => {
 
     return (
         <div style={{
-            width: '200px',
             marginBottom: '10px',
             display: 'flex',
             flexDirection: 'column',

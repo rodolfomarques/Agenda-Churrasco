@@ -1,61 +1,52 @@
 import { useContext } from "react";
 import { DataContext }  from '../model/contextos';
-import ItemParticipante from "./components/ItemParticipante";
-import peopleIcon from '../images/icon_people.png'
-import moneyIcon from '../images/icon_money.png'
+import { useNavigate } from 'react-router-dom';
+import TextField from "./components/TextField";
+import CustomButton from "./components/CustomButton";
 
 const CadastroChurasco = () => {
 
-    const { dataState } = useContext(DataContext);
+    const { dataDispatch } = useContext(DataContext);
+    const navigate = useNavigate()
 
     let style = {
 
         width: '100%',
         marginTop: '-40px',
-        paddingBottom: '30px',
-        backgroundColor: '#FFF',
+        padding: '30px 50px',
+        backgroundColor: '#eeecec',
         boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.06)',
         borderRadius: '2px',
 
     }
 
-    let styleHeader = {
+    const onSubmit = (e) => {
 
-        backgroundColor: "#fff",
-        padding: '20px 40px',
-        display: 'flex',
-        justifyContent: 'space-between'
+        e.preventDefault();
+
+        let form = document.forms.cadastroChurrasco;
+        let nome = form.nome.value;
+        let descricao = form.descricao.value;
+        let data = form.data.value;
+        let valorCarnes = +form.valorCarnes.value;
+        let valorBebidas = +form.valorBebidas.value;
+
+        dataDispatch({type: 'novoChurrasco', payload: {nome, descricao, data, valorCarnes, valorBebidas}})
+        navigate(`/`);
 
     }
 
-    let churrasco = {
-        participantes: [],
-        nome: 'Niver do Gui',
-        valorTotal: 250,
-    }
-
-    let paragraphStyle ={
-        margin: 0,
-        fontWeight: 600
-    }
 
     return (
         <article style={style}>
-            <form >
-                <div>
-                    <h3 style={{margin: '5px 0px', fontWeight: 600}}>01/02</h3>
-                    <h2 style={{margin: '5px 0px', fontWeight: 600}}>{churrasco.nome}</h2>
-                </div>
-                <section style={{fontWeight: 500, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
-                    <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-                        <img src={peopleIcon} alt='participantes'/>
-                        <p style={paragraphStyle}>{churrasco.participantes.length}</p>
-                    </span>
-                    <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
-                        <img src={moneyIcon} alt='participantes'/>
-                        <p style={{paragraphStyle}}>{churrasco.valorTotal.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
-                    </span>
-                </section>
+            <h2 style={{margin: '0px 0px 20px 0px', fontWeight: 600, textAlign:'center'}}>Cadastrar Churrasco</h2>
+            <form nome='cadastroChurrasco' id='cadastroChurrasco' style={{display: 'flex', flexDirection: 'column'}} onSubmit={(e) => {onSubmit(e)}} >
+                <TextField label='Nome' type="text" inputProps={{id: 'nome'}}  />
+                <TextField label='Descrição' type="text" inputProps={{id: 'descricao'}}/>
+                <TextField label='Data' type='date' inputProps={{id: 'data'}}/>
+                <TextField label='Valor Carnes' type='number' inputProps={{id:'valorCarnes', min: 1, step:.01 }} />
+                <TextField label='Valor Bebidas' type='number' inputProps={{id:'valorBebidas', min: 1, step:.01 }} />
+                <CustomButton label='Cadastrar' />
             </form>
         </article>
     )
