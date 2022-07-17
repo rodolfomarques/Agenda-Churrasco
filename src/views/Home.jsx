@@ -1,24 +1,34 @@
 import { useContext } from "react";
 import { DataContext }  from '../model/contextos';
-import { Box } from '@mui/material';
 import CardProduto from "./components/CardProduto";
+import AdicionarChurrasco from "./components/AdicionarChurrasco";
 
 const Home = () => {
 
     const { dataState } = useContext(DataContext);
 
+    let homeStyle = {
+
+        width: '100%',
+        marginTop: '-40px',
+        display: 'flex', 
+        gap: '20px', 
+        flexWrap: 'wrap', 
+        justifyContent: 'space-between',
+
+    }
+
     return (
-        <Box component='section' sx={{width: '100%'}}>
-            <Box component='section' sx={{display: 'flex', gap: 2, flexWrap: 'wrap', justifyContent: 'space-between'}}>
-                {
-                    dataState.produtos.map((produto, i) => {
-                        return (
-                            <CardProduto produto={produto} key={`produto-${i}`} />
-                        )
-                    })
-                }
-            </Box>
-        </Box>
+        <section style={homeStyle}>
+            {
+                dataState.churrascos.map((churrasco, i) => {
+                    return (
+                        <CardProduto churrasco={churrasco} key={`churrasco-${i}`} />
+                    )
+                })
+            }
+            <AdicionarChurrasco />
+    </section>
     )
 
 }

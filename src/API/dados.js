@@ -2,67 +2,101 @@ module.exports = {
     users: [
         {
             nome: 'João Silva',
-            ultimo_acesso: 'data',
-            email: 'joaosilva@gmail.com',
+            login: 'joaosilva@gmail.com',
             senha: '1234'
         }
     ],
-    products: [
+    churrascos: [
         {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper',
-            valor: 15.90,
-            link: '#',
+            id: 1,
+            nome: 'Niver do Gui',
+            data: '01-01-22T12:00:00.000Z',
+            valorCarne: 250.00,
+            valorBebidas: 80.90,
+            valorTotal: 330.00,
+            participantes: [
+                {
+                    nome: 'Pedro Sereno',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Lúcia',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Sandra',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Pedro moreira',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+            ],
         },
         {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper PT 500 alcalino 210x297 A4 chamex officer',
-            valor: 31.99,
-            link: '#',
+            id: 2,
+            nome: 'Final de Ano',
+            data: '01-01-22T12:00:00.000Z',
+            valorCarne: 200.00,
+            valorBebidas: 80.90,
+            valorTotal: 280.00,
+            participantes: [
+                {
+                    nome: 'Pedro Sereno',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Lúcia',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Sandra',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Pedro moreira',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+            ],
         },
         {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper',
-            valor: 15.90,
-            link: '#',
-        },
-        {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper',
-            valor: 15.90,
-            link: '#',
-        },
-        {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper PT 500 alcalino 210x297 A4 chamex officer',
-            valor: 31.99,
-            link: '#',
-        },
-        {
-            codigo: '#COD03021',
-            image: '/slide-1.jpg',
-            titulo: 'Papel Sulfite 75g Alcalino 210x297 A4 chamex Oficcer Ipaper',
-            valor: 15.90,
-            link: '#',
-        },
-    ],
-    banner: [
-        {
-            image: '/slide-1.jpg',
-            titulo: 'Campanha Copa 2014'
-        },
-        {
-            image: '/slide-2.jpg',
-            titulo: 'Campanha Copa 2014'
-        },
-        {
-            image: '/slide-3.jpg',
-            titulo: 'Campanha Copa 2014'
+            id: 3,
+            nome: 'Sem Motivo',
+            data: '01-01-22T12:00:00.000Z',
+            valorCarne: 250.00,
+            valorBebidas: 0,
+            valorTotal: 250.00,
+            participantes: [
+                {
+                    nome: 'Pedro Sereno',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Lúcia',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Sandra',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+                {
+                    nome: 'Pedro moreira',
+                    contribuicao: 50.00,
+                    pagamentoRealizado: false,
+                },
+            ],
         },
     ]
+
 }

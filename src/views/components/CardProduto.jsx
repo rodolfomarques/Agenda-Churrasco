@@ -1,31 +1,34 @@
 import * as React from 'react';
-import { Card, CardContent, CardMedia, Typography, Box, Button } from '@mui/material';
-import {AddShoppingCart} from '@mui/icons-material/';
+import peopleIcon from '../../images/icon_people.png'
+import moneyIcon from '../../images/icon_money.png'
 
-const CardProduto = ({produto}) => {
+const CardProduto = ({churrasco}) => {
+
+    let styleCard = {
+
+        flex: '1 1',
+        backgroundColor: "#fff",
+        padding: '20px 40px',
+        borderRadius: '2px',
+        boxShadow: '0px 0px 16px rgba(0, 0, 0, 0.06)',
+
+    }
+    
     return (
-        <Card sx={{ maxWidth: 345, flex: 1, flexBasis: '270px' }}>
-            <Box sx={{height: '100%',  display: 'flex', flexDirection: 'column', justifyContent: 'flex-start', alignItems: 'flex-start'}}>
-                <CardContent sx={{}}>
-                    <Typography variant="subtitle2">{produto.codigo}</Typography>
-                    <CardMedia
-                        component="img"
-                        height="140"
-                        image={produto.image}
-                        alt={produto.titulo}
-                    />
-                </CardContent>
-                <CardContent sx={{pt:0, height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
-                    <Typography variant="body2" color="text.secondary">
-                        {produto.titulo}
-                    </Typography>
-                    <Typography gutterBottom variant="h5" component="h5" sx={{fontWeight: '500', mt:1}}>
-                        {produto.valor.toLocaleString('pt-BR', {style: 'currency', currency: 'BRL'})}
-                    </Typography>
-                    <Button variant='contained' sx={{backgroundColor: '#64b5f6'}}><AddShoppingCart fontSize='small' /> Carrinho</Button>
-                </CardContent>
-            </Box>
-        </Card>
+        <article style={styleCard}>
+            <h2 style={{margin: '5px 0px'}}>01/02</h2>
+            <h3 style={{margin: '5px 0px'}}>{churrasco.nome}</h3>
+            <section style={{display: 'flex', justifyContent: 'space-between', fontWeight: 500, marginTop: '20px'}}>
+                <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
+                    <img src={peopleIcon} alt='participantes'/>
+                    <p>{churrasco.participantes.length}</p>
+                </span>
+                <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
+                    <img src={moneyIcon} alt='participantes'/>
+                    <p>{churrasco.valorTotal.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</p>
+                </span>
+            </section>
+        </article>
     );
 }
 

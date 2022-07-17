@@ -20,8 +20,6 @@ export default class Axios {
                 else {
                     let dadosUsuario = {
                         nome: usuario.nome,
-                        ultimo_acesso: usuario.ultimo_acesso,
-                        email: usuario.email,
                     }
                     resolve({status: 200, data: {...dadosUsuario}})
                 }
@@ -34,10 +32,8 @@ export default class Axios {
         switch(rota) {
             case '/dadosUsuario':
                 return this.retorno(dados.users[0]);
-            case '/produtos':
-                return this.retorno(dados.products);
-            case '/imagensCarrossel':
-                return this.retorno(dados.banner);
+            case '/churrascos':
+                return this.retorno(dados.churrascos);
             default:
                 return {}
         }

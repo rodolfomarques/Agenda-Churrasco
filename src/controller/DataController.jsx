@@ -5,7 +5,7 @@ import Axios from '../API/endpoints';
 const axios = new Axios();
 
 const inicialState = {
-    produtos: [],
+    churrascos: [],
     banner: []
 }
 
@@ -16,11 +16,8 @@ const DataController = ({children}) => {
 
     useEffect(() => {
         
-        axios.get('/produtos')
+        axios.get('/churrascos')
         .then(resp => { dataDispatch({type: 'inserirProdutos', payload: resp.data}) })
-
-        axios.get('/imagensCarrossel')
-        .then(resp => { dataDispatch({type: 'inserirImagensBanner', payload: resp.data})})
 
     }, [])
 
