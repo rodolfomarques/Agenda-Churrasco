@@ -63,7 +63,12 @@ const DataController = ({children}) => {
 
         let churrascos = dataState.churrascos;
         let indexChurrasco = churrascos.findIndex(churrasco => churrasco.id === +id_churrasco? true: false);
-        let ultimoId = churrascos[indexChurrasco].participantes.at(-1).id;
+        let ultimoId;
+        if(churrascos[indexChurrasco].participantes.length === 0) {
+            ultimoId = 1
+        } else {
+            ultimoId = churrascos[indexChurrasco].participantes.at(-1).id;
+        }
         churrascos[indexChurrasco].participantes.push({id: ultimoId + 1, ...dados, pagamentoRealizado: false});
         dataDispatch({type: 'atualizarChurrascos' , payload: churrascos});
 
