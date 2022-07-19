@@ -6,7 +6,7 @@ import CustomButton from "./components/CustomButton";
 
 const CadastroChurasco = () => {
 
-    const { dataDispatch } = useContext(DataContext);
+    const { adicionarChurrasco } = useContext(DataContext);
     const navigate = useNavigate()
 
     let style = {
@@ -31,7 +31,7 @@ const CadastroChurasco = () => {
         let valorCarnes = +form.valorCarnes.value;
         let valorBebidas = +form.valorBebidas.value;
 
-        dataDispatch({type: 'novoChurrasco', payload: {nome, descricao, data, valorCarnes, valorBebidas}})
+        adicionarChurrasco({nome, descricao, data, valorCarnes, valorBebidas})
         navigate(`/`);
 
     }

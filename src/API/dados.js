@@ -11,15 +11,16 @@ module.exports = {
             id: 1,
             nome: 'Niver do Gui',
             data: '2011-08-12T20:17:46.384Z',
-            valorCarne: 250.00,
+            valorCarnes: 250.00,
             valorBebidas: 80.90,
             valorTotal: 330.00,
+            valorArrecadado: 0,
             participantes: [
                 {
                     id: 1,
                     nome: 'Pedro Sereno',
                     contribuicao: 50.00,
-                    pagamentoRealizado: true,
+                    pagamentoRealizado: false,
                 },
                 {
                     id: 2,
@@ -48,6 +49,7 @@ module.exports = {
             valorCarne: 200.00,
             valorBebidas: 80.90,
             valorTotal: 280.00,
+            valorArrecadado: 0,
             participantes: [
                 {
                     id: 1,
@@ -82,6 +84,7 @@ module.exports = {
             valorCarne: 250.00,
             valorBebidas: 0,
             valorTotal: 250.00,
+            valorArrecadado: 0,
             participantes: [
                 {
                     id: 1,

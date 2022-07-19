@@ -6,6 +6,7 @@ import Home from "../views/Home";
 import Login from "../views/Login";
 import DetalhesChurrasco from '../views/DetalhesChurrasco';
 import CadastroChurasco from "../views/CadastroChurasco";
+import CadastroParticipante from "../views/CadastroParticipante";
 
 const Rotas = () => {
 
@@ -27,6 +28,7 @@ const Rotas = () => {
                             <Route index element={<Home />} />
                             <Route path="novochurrasco" element={<CadastroChurasco />} />
                             <Route path="churrasco/:id" element={<DetalhesChurrasco />} />
+                            <Route path="churrasco/:id/addparticipante" element={<CadastroParticipante />} />
                         </Route>
 
                     )

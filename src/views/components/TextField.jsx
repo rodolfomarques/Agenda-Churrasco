@@ -9,6 +9,7 @@ const TextField = (props) => {
             flexDirection: 'column',
             alignItens: 'flex-start',
             justifyContent: 'flex-start',
+            ...props.style
         }}>
             <label style={{fontWeight: 600, marginBottom: '10px'}}>{props.label}</label>
             <input 

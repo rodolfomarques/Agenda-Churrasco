@@ -1,28 +1,14 @@
 import { useState, useEffect, useContext } from 'react';
 import { DataContext } from '../../model/contextos';
 
-const ItemParticipante = ({participante, setTotalArrecadado, index, removerItem, habilitarDeletar}) => {
+const ItemParticipante = ({idChurrasco, participante, index, habilitarDeletar}) => {
 
     const [ hover, setHover ] = useState(false);
-    const [ checked, setChecked ] = useState(false)
-    const { dataDispatch } = useContext(DataContext);
-
-
-    // useEffect(() => {
-
-    //     if(participante.pagamentoRealizado) { 
-    //         setChecked(true);
-    //         // setTotalArrecadado(prevState => prevState + participante.contribuicao);
-    //     } 
-    //     else { setChecked(false) }
-
-    // }, [participante])
+    const { dataDispatch, gerenciarContribuicao, removerParticipante } = useContext(DataContext);
 
     useEffect(() => {
-
-        dataDispatch({type: 'avaliarContribuicao', payload: {id: participante.id, status: checked}})
-
-    },[checked])
+        console.log();
+    }, [])
 
    
     let itemStyle = {
@@ -52,7 +38,7 @@ const ItemParticipante = ({participante, setTotalArrecadado, index, removerItem,
     let customCheckbox = {
         height: '10px',
         width: '10px',
-        backgroundColor: (hover || checked)? '#FFD836' :'#fff',
+        backgroundColor: (hover || participante.pagamentoRealizado)? '#FFD836' :'#fff',
         borderRadius: '50%',
         border: '2px solid #998220',
 
@@ -61,17 +47,7 @@ const ItemParticipante = ({participante, setTotalArrecadado, index, removerItem,
     const onMouseHover = () => { setHover(true) }
     const onMouseLeaves = () => { setHover(false) }
     const onClick = () => {
-        setChecked(prevState => !prevState);
-        dataDispatch({})
-    }
-
-    const handleCollaboration = (e) => {
-        console.log(e.target.checked);
-        if(e.target.checked) {
-            setTotalArrecadado(prevState => prevState + participante.contribuicao)
-        } else {
-            setTotalArrecadado(prevState => prevState - participante.contribuicao)
-        }
+        gerenciarContribuicao(idChurrasco, participante.id)
     }
 
     return (
@@ -93,15 +69,15 @@ const ItemParticipante = ({participante, setTotalArrecadado, index, removerItem,
                     }
                     // onClick={onClick}
                 >
-                    <input id={`participante-${index}`} style={checkStyle} type='checkbox' checked={participante.pagamentoRealizado} onChange={(e) => {handleCollaboration(e)}} />
+                    <input id={`participante-${index}`} style={checkStyle} type='checkbox' checked={participante.pagamentoRealizado} />
                     <span style={customCheckbox}  onClick={onClick}></span>
                     <p style={paragraphStyle} 
                         // onClick={onClick}
                     >{participante.nome}</p>
                 </label>
                 <div style={{display: 'flex', gap: 10}}>
-                    <p style={{...paragraphStyle, textDecoration: checked? 'line-through': 'unset',}}>{participante.contribuicao.toLocaleString(`pt-br`, {style:'currency', currency:'BRL'})}</p>
-                    {habilitarDeletar && <button style={{color: '#fff', border: 'unset', borderRadius: '5px', backgroundColor: '#a02e2e'}} onClick={() => removerItem(participante.id)}>remover</button>}
+                    <p style={{...paragraphStyle, textDecoration: participante.pagamentoRealizado? 'line-through': 'unset',}}>{participante.contribuicao.toLocaleString(`pt-br`, {style:'currency', currency:'BRL'})}</p>
+                    {habilitarDeletar && <button style={{color: '#fff', border: 'unset', borderRadius: '5px', backgroundColor: '#a02e2e'}} onClick={() => removerParticipante(idChurrasco, participante.id)}>remover</button>}
                 </div>
             </li>
             <hr style={{margin: 0, border: '1px solid #E5C23155', }} />

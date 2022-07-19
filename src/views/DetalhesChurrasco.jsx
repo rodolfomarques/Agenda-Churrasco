@@ -1,5 +1,5 @@
 import { useContext, useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { DataContext }  from '../model/contextos';
 import ItemParticipante from "./components/ItemParticipante";
 import CustomButton from "./components/CustomButton";
@@ -12,18 +12,26 @@ import moneyIcon from '../images/icon_money.png'
 
 const DetalhesChurrasco = () => {
 
-    const { dataState, dataDispatch } = useContext(DataContext);
-    const [ churrasco, setChurrasco ] = useState({participantes: [], nome: '', valorTotal: 0,})
-    const [ totalArrecadado, setTotalArrecadado ] = useState(0)
-    const [ ativarRemover, setAtivarRemover ] = useState(false)
+    const { dataState, dataDispatch, totalArrecadado } = useContext(DataContext);
+    const [ churrasco, setChurrasco ] = useState({participantes: [], nome: '', valorTotal: 0, valorArrecadado: 0})
+    const [ ativarRemover, setAtivarRemover ] = useState(false);
     const { id } = useParams();
+    const navigate = useNavigate();
 
 
-    useEffect(() => { dataDispatch({type: 'selecionarChurrasco', payload: id}) }, [])
+    useEffect(() => { 
+
+        dataDispatch({type: 'selecionarChurrasco', payload: id}) 
+        totalArrecadado(id)
+
+    }, [])
+
     useEffect(() => {
+        
         if(dataState.churrascoSelecionado.id !== undefined) {
             setChurrasco(dataState.churrascoSelecionado)
         }
+
     }, [dataState])
 
 
@@ -53,11 +61,6 @@ const DetalhesChurrasco = () => {
         fontWeight: 600
     }
 
-    const handleDeleteItem = (id_participante) => {
-
-        dataDispatch({type: 'removerParticipante', payload: {id_churrasco: id, id_participante}})
-   
-    }
 
     const habilitarBotaoDelete = () => { setAtivarRemover(prevState => !prevState) }
 
@@ -76,7 +79,7 @@ const DetalhesChurrasco = () => {
                     <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
                         <img src={moneyIcon} alt='participantes'/>
                         <p style={{paragraphStyle}}>
-                            {totalArrecadado}/{churrasco?.valorTotal.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}
+                            {churrasco.valorArrecadado.toFixed(2)}/{churrasco?.valorTotal.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}
                         </p>
                     </span>
                 </section>
@@ -85,12 +88,11 @@ const DetalhesChurrasco = () => {
                 {
                     churrasco.participantes.map((participante, i) => {
                         return (
-                            <ItemParticipante 
+                            <ItemParticipante
+                                idChurrasco={churrasco.id}
                                 participante={participante} 
-                                setTotalArrecadado={setTotalArrecadado} 
                                 index={i} 
                                 key={i} 
-                                removerItem={handleDeleteItem} 
                                 habilitarDeletar={ativarRemover} 
                             />
                         )
@@ -98,7 +100,7 @@ const DetalhesChurrasco = () => {
                 }
             </ol>
             <section style={{padding: '10px 30px', display: 'flex', gap: '10px'}}>
-                <CustomButton label='Adicionar participante' />
+                <CustomButton label='Adicionar participante' buttonProps={{onClick: () => {navigate(`/churrasco/${id}/addparticipante`)}}} />
                 <CustomButton label='Remover participante' buttonProps={{onClick: habilitarBotaoDelete}} />
             </section>
         </article>
