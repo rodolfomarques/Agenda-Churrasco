@@ -71,7 +71,7 @@ const DetalhesChurrasco = () => {
                     <h3 style={{margin: '5px 0px', fontWeight: 600}}>{churrasco.data && format(new Date(churrasco.data), 'dd/MM' )}</h3>
                     <h2 style={{margin: '5px 0px', fontWeight: 600}}>{churrasco?.nome}</h2>
                 </div>
-                <section style={{fontWeight: 500, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly'}}>
+                <section style={{fontWeight: 500, display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly', alignItems: 'flex-end'}}>
                     <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
                         <img src={peopleIcon} alt='participantes'/>
                         <p style={paragraphStyle}>{churrasco?.participantes.length}</p>
@@ -79,7 +79,7 @@ const DetalhesChurrasco = () => {
                     <span style={{display: 'flex', alignItems: 'center', gap: '5px'}}>
                         <img src={moneyIcon} alt='participantes'/>
                         <p style={{paragraphStyle}}>
-                            {churrasco.valorArrecadado.toFixed(2)}/{churrasco?.valorTotal.toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}
+                            R$ {churrasco.valorArrecadado.toFixed(2)}/{churrasco?.valorTotal.toFixed(2)}
                         </p>
                     </span>
                 </section>

@@ -9,11 +9,12 @@ const CustomButton = (props) => {
         color: '#FFF',
         fontWeight: 600,
         fontSize: '16px',
-        width: '100%'
+        width: '100%',
+        cursor: 'pointer'
     }
 
     return (
-        <button style={style} {...props.buttonProps}>
+        <button style={style} {...props.buttonProps} type='submit'>
             {props.label}
         </button>
     )

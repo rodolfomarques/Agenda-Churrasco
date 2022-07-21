@@ -14,6 +14,7 @@ const Login = () => {
 
         width: '100%',
         height: '100%',
+        marginTop: '-60px',
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',

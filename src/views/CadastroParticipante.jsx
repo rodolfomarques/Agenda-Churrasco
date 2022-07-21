@@ -3,6 +3,7 @@ import { DataContext }  from '../model/contextos';
 import { useNavigate, useParams } from 'react-router-dom';
 import TextField from "./components/TextField";
 import CustomButton from "./components/CustomButton";
+import InputMask from "react-input-mask";
 
 const CadastroParticipante = () => {
 
@@ -59,20 +60,33 @@ const CadastroParticipante = () => {
 
         let form = document.forms.cadastroChurrasco;
         let nome = form.nome.value;
-        let contribuicao = +form.contribuicao.value;
+        let contribuicao = form.contribuicao.value;
+        console.log(contribuicao);
+        let valor = Number(contribuicao.slice(2).replace(/\./g, '').replace(',','.'))
 
-        adicionarParticipante(id, {nome, contribuicao})
+
+        adicionarParticipante(id, {nome, contribuicao: valor})
         navigate(`/churrasco/${id}`);
 
     }
 
     return (
         <article style={style}>
-            <h2 style={{margin: '0px 0px 20px 0px', fontWeight: 600, textAlign:'center'}}>Cadastrar Churrasco</h2>
+            <h2 style={{margin: '0px 0px 20px 0px', fontWeight: 600, textAlign:'center'}}>Cadastrar Participante</h2>
             <form nome='cadastroChurrasco' id='cadastroChurrasco' style={{display: 'flex', flexDirection: 'column'}} onSubmit={(e) => {onSubmit(e)}} >
                 <section style={{display: 'flex', gap: '10px'}}>
                     <TextField label='Nome' type="text" style={{flex:1}} inputProps={{id: 'nome'}}  />
-                    <TextField label='Contribuição' type='number' style={{flex:1}} inputProps={{id:'contribuicao', min: 1, step:.01, onChange: (e) => {incentivarParticipante(e.target.value)}, }} />
+                    <TextField 
+                        label='Contribuição' 
+                        type='valor' 
+                        style={{flex:1}} 
+                        inputProps={{
+                            id:'contribuicao',
+                            onChange: (e) => {
+                                let valor = Number(e.target.value.slice(2).replace(/\./g, '').replace(',','.'))
+                                incentivarParticipante(valor)
+                            }
+                        }} />
                 </section>
                 <section style={{display: 'flex', gap: '10px'}}>
                     <h3 style={{flex:1, textAlign: 'center',}} >Valor sugerido: {Number(valorSugerido).toLocaleString('pt-br', {style: 'currency', currency: 'BRL'})}</h3>

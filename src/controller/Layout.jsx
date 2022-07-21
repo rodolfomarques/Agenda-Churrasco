@@ -1,17 +1,17 @@
-import { useState } from 'react';
+import { useContext } from 'react';
+import { AuthContext } from '../model/contextos';
 import { Outlet } from 'react-router-dom';
-import { Box } from '@mui/material';
 import Header from '../componentesLayout/Header';
 
 
 const Layout = ({children}) => {
 
-    const [ abrir, setAbrir ] = useState(false);
+    const { autenticado } = useContext(AuthContext);
 
     let mainStyle = {
         width: '100%', 
         minHeight: '70vh',
-        backgroundColor: '#eee',
+        backgroundColor: autenticado? '#eee': '#FFD836',
         display: 'grid',
         gridTemplateColumns: '1fr minmax(280px, 600px) 1fr',
         gridTemplateRows: '1fr',

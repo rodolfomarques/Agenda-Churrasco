@@ -28,10 +28,13 @@ const CadastroChurasco = () => {
         let nome = form.nome.value;
         let descricao = form.descricao.value;
         let data = form.data.value;
-        let valorCarnes = +form.valorCarnes.value;
-        let valorBebidas = +form.valorBebidas.value;
+        let valorCarnes = form.valorCarnes.value;
+        let valorBebidas = form.valorBebidas.value;
 
-        adicionarChurrasco({nome, descricao, data, valorCarnes, valorBebidas})
+        let carnes = Number(valorCarnes.slice(2).replace(/\./g, '').replace(',','.'))
+        let bebidas = Number(valorBebidas.slice(2).replace(/\./g, '').replace(',','.'))
+
+        adicionarChurrasco({nome, descricao, data, valorCarnes: carnes, valorBebidas: bebidas})
         navigate(`/`);
 
     }
@@ -44,8 +47,8 @@ const CadastroChurasco = () => {
                 <TextField label='Nome' type="text" inputProps={{id: 'nome'}}  />
                 <TextField label='Descrição' type="text" inputProps={{id: 'descricao'}}/>
                 <TextField label='Data' type='date' inputProps={{id: 'data'}}/>
-                <TextField label='Valor Carnes' type='number' inputProps={{id:'valorCarnes', min: 1, step:.01 }} />
-                <TextField label='Valor Bebidas' type='number' inputProps={{id:'valorBebidas', min: 1, step:.01 }} />
+                <TextField label='Valor Carnes' type='valor' inputProps={{id:'valorCarnes', min: 1, step:.01 }} />
+                <TextField label='Valor Bebidas' type='valor' inputProps={{id:'valorBebidas', min: 1, step:.01 }} />
                 <CustomButton label='Cadastrar' />
             </form>
         </article>
