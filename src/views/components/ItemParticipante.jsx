@@ -4,7 +4,7 @@ import { DataContext } from '../../model/contextos';
 const ItemParticipante = ({idChurrasco, participante, index, habilitarDeletar}) => {
 
     const [ hover, setHover ] = useState(false);
-    const { dataDispatch, gerenciarContribuicao, removerParticipante } = useContext(DataContext);
+    const { gerenciarContribuicao, removerParticipante } = useContext(DataContext);
 
     useEffect(() => {
         console.log();

@@ -1,4 +1,5 @@
-import { useState, useContext } from 'react';
+import { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import { AuthContext } from '../model/contextos';
 import bgPattern from '../images/bg-pattern.png'
 
@@ -23,7 +24,9 @@ const Header = ({title}) => {
     
     return (
         <header style={headerStyle}>
-            <h1 style={h1Style}>{title}</h1>
+            <Link to='/' style={{color: '#000'}}>
+                <h1 style={h1Style}>{title}</h1>
+            </Link>
         </header>
     )
 }
