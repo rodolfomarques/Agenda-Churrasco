@@ -56,7 +56,6 @@ const ItemParticipante = ({idChurrasco, participante, index, habilitarDeletar}) 
                 style={itemStyle}
                 onMouseEnter={onMouseHover}
                 onMouseLeave={onMouseLeaves}
-                // onClick={onClick}
             >
                 <label 
                     style={
@@ -67,12 +66,11 @@ const ItemParticipante = ({idChurrasco, participante, index, habilitarDeletar}) 
                             '&:hover input ~ span': {backgroundColor:'#ccc',}
                         }
                     }
-                    // onClick={onClick}
                 >
                     <input id={`participante-${index}`} style={checkStyle} type='checkbox' checked={participante.pagamentoRealizado} />
                     <span style={customCheckbox}  onClick={onClick}></span>
                     <p style={paragraphStyle} 
-                        // onClick={onClick}
+                        onClick={onClick}
                     >{participante.nome}</p>
                 </label>
                 <div style={{display: 'flex', gap: 10}}>
